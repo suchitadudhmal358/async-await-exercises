@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Async await example</title>
+  </head>
+  <body>
+    <style>
+      .go {
+        margin: 5rem;
+        background: burlywood;
+        padding: 5rem;
+        width: 5rem;
+        height: 5rem;
+        transition: all 0.2s;
+      }
+
+      .go.circle {
+        border-radius: 50%;
+      }
+
+      .go.red {
+        background: red;
+      }
+
+      .go.purple {
+        background: purple;
+      }
+
+      .go.fadeOut {
+        opacity: 0;
+      }
+    </style>
+
+    <div class="go">Click Me</div>
+
+    <script>
+      const go = document.querySelector(".go");
+
+      const wait = (ms = 0) =>
+        new Promise((resolve) => setTimeout(resolve, ms));
+
+      wait(200).then(() => {
+        console.log("Done");
+      });
+
+      async function animate(e) {
+        el = e.currentTarget;
+        //change text
+        el.textContent = "Go!";
+        //change shape to circle
+        await wait(200);
+        el.classList.add("circle");
+        await wait(500);
+        el.classList.add("red");
+        await wait(250);
+        el.classList.remove("circle");
+        await wait(300);
+        el.classList.remove("red");
+        el.classList.add("purple");
+        await wait(500);
+        el.classList.add("fadeOut");
+      }
+
+      go.addEventListener("click", animate);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Async await Error Handling</title>
+  </head>
+  <body>
+    <script>
+      function makePizza(toppings = []) {
+        return new Promise(function (resolve, reject) {
+          if (toppings.includes("pineapple")) {
+            reject("Seriosuly? Get Out");
+          }
+          setTimeout(function () {
+            resolve(
+              `Here is your pizza with the toppings ${toppings.join(" ")}`
+            );
+          }, 1000);
+        });
+      }
+
+      //1st method - error handling using try-catch
+      //   async function go() {
+      //     try {
+      //       const pizza = await makePizza(["pineapple"]);
+      //       console.log(pizza);
+      //     } catch (error) {
+      //       console.log("Ohhh nooo");
+      //       console.log(error);
+      //     }
+      //   }
+
+      //2nd method
+      //   function handleError(error) {
+      //     console.log("Ohhh nooo");
+      //     console.log(error);
+      //   }
+      //   async function go() {
+      //     const pizza = await makePizza(["pineapple"]).catch(handleError);
+      //     console.log(pizza);
+      //   }
+      //  go();
+
+      //3rd way
+      function handleError(error) {
+        console.log("Ohhh nooo");
+        console.log(error);
+      }
+      async function go() {
+        const pizza = await makePizza(["pineapple"]);
+        console.log(pizza);
+      }
+
+      go()
+        .then((result) => {
+          console.log(result);
+        })
+        .catch(handleError);
+
+      //4rth way
+      //   function handleError(error) {
+      //     console.log("Ohhh nooo");
+      //     console.log(error);
+      //   }
+      //   async function go() {
+      //     const pizza = await makePizza(["pineapple"]);
+      //     console.log(pizza);
+      //   }
+
+      //   async function goGo() {
+      //       const result = await go()
+      //   }
+
+      //   goGo().catch(handleError)
+    </script>
+  </body>
+</html>

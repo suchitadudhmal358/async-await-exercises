@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Basics of Async await</title>
+  </head>
+  <body>
+    <script>
+      function wait(ms = 0) {
+        return new Promise((resolve) => {
+          setTimeout(resolve, ms);
+        });
+      }
+
+      async function go() {
+        console.log("Starting");
+        await wait(2000);
+        console.log("Running");
+        await wait(2000);
+        console.log("Ending");
+      }
+
+      go();
+
+      //declaring async function in different ways
+      //normal dunction
+      async function fd() {}
+
+      //arrow function
+      const arroFn = async () => {};
+
+      //callback func
+      window.addEventListener("click", async function () {});
+
+      //object
+      const person = {
+        //method
+        sayHi: async function () {},
+
+        //method shorthand
+        async sayHello() {},
+
+        //function property
+        sayHi: async () => {},
+      };
+    </script>
+  </body>
+</html>
